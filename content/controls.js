@@ -8,6 +8,10 @@ export default class Controls {
 		this.controlMap[name] = key;
 	}
 
+	static getBind (name) {
+		return this.controlMap[name];
+	}
+
 	static isDown (name) {
 		return Keyboard.isKeyDown(this.controlMap[name]);
 	}
