@@ -1,3 +1,5 @@
+import Display from "../front/display.js";
+
 export default class Entity {
 
 	position;
@@ -33,6 +35,23 @@ export default class Entity {
 
 	draw () {
 		return;
+	}
+
+	// Draw Functions
+	drawInfo () {
+		const measure = Display.context.measureText(this.constructor.name);
+		const height = measure.actualBoundingBoxAscent + measure.actualBoundingBoxDescent;
+		
+		Display.context.save();
+		Display.context.textBaseline = "bottom";
+
+		Display.context.fillStyle = "#000000";
+		Display.context.fillRect(this.x, this.y - height, measure.width, height);
+		
+		Display.context.fillStyle = "#ffffff";
+		Display.context.fillText(this.constructor.name, this.x, this.y);
+
+		Display.context.restore();
 	}
 
 }

@@ -60,30 +60,42 @@ export default class Player extends Box {
 		Display.context.fillStyle = this.color;
 		Display.context.fillRect(this.x, this.y, this.width, this.height);
 
-		if (this.dashSpeed > 0) {
-			const left = Controls.isDown("MoveLeft");
-			const right = Controls.isDown("MoveRight");
-			const up = Controls.isDown("MoveUp");
-			const down = Controls.isDown("MoveDown");
+		this.drawDash();
+		// this.drawInfo();
+	}
 
-			const initDirX = right - left;
-			const initDirY = down - up;
+	// Draw Functions
 
-			const dirX = initDirX;
-			const dirY = initDirY;
-
-			const x = this.x + dirX * this.dashSpeed;
-			const y = this.y + dirY * this.dashSpeed;
-
-			Display.context.fillStyle = this.color;
-			Display.context.fillRect(x, y, this.width, this.height);
-
-			Display.context.strokeStyle = this.color;
-			Display.context.beginPath();
-			Display.context.arc(this.x + this.width / 2, this.y + this.height / 2, this.dashSpeed, 0, 2*Math.PI);
-			Display.context.closePath();
-			Display.context.stroke();
+	drawDash () {
+		if (this.dashSpeed == 0) {
+			return;
 		}
+
+		const left = Controls.isDown("MoveLeft");
+		const right = Controls.isDown("MoveRight");
+		const up = Controls.isDown("MoveUp");
+		const down = Controls.isDown("MoveDown");
+
+		// const initDirX = right - left;
+		// const initDirY = down - up;
+
+		// const dirX = initDirX;
+		// const dirY = initDirY;
+
+		const dirX = right - left;
+		const dirY = down - up;
+
+		const x = this.x + dirX * this.dashSpeed;
+		const y = this.y + dirY * this.dashSpeed;
+
+		Display.context.fillStyle = this.color;
+		Display.context.fillRect(x, y, this.width, this.height);
+
+		Display.context.strokeStyle = this.color;
+		Display.context.beginPath();
+		Display.context.arc(this.x + this.width / 2, this.y + this.height / 2, this.dashSpeed, 0, 2 * Math.PI);
+		Display.context.closePath();
+		Display.context.stroke();
 	}
 
 	// Misc.
