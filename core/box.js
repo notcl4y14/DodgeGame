@@ -5,6 +5,7 @@ export default class Box extends Entity {
 
 	color;
 	speed;
+	defaultSpeed;
 
 	draw () {
 		Display.context.fillStyle = this.color;
