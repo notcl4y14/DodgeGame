@@ -5,8 +5,8 @@ import CustomEvent from "./front/event.js";
 import Player from "./content/entities/player.js";
 import Controls from "./content/controls.js";
 
-let runner = null;
-let player = null;
+window.runner = null;
+window.player = null;
 
 window.onload = () => {
 	Display.linkCanvas(document.querySelector('canvas'));
