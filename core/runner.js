@@ -1,6 +1,3 @@
-import Display from "../front/display.js";
-import Box from "./box.js";
-
 export default class Runner {
 
 	ticks;
