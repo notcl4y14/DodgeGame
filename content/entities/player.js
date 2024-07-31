@@ -104,6 +104,12 @@ export default class Player extends Box {
 		Display.context.arc(this.x + this.width / 2, this.y + this.height / 2, this.dashSpeed, 0, 2 * Math.PI);
 		Display.context.closePath();
 		Display.context.stroke();
+
+		Display.context.beginPath();
+		Display.context.moveTo(this.x + this.width / 2, this.y + this.height / 2);
+		Display.context.lineTo((this.x + this.width / 2) + dirX * this.dashSpeed, (this.y + this.height / 2) + dirY * this.dashSpeed);
+		Display.context.closePath();
+		Display.context.stroke();
 	}
 
 	// Misc.
