@@ -82,8 +82,16 @@ export default class Player extends Box {
 		// const dirX = initDirX;
 		// const dirY = initDirY;
 
-		const dirX = right - left;
-		const dirY = down - up;
+		let dirX = right - left;
+		let dirY = down - up;
+
+		// https://forum.freecodecamp.org/t/how-do-i-get-another-circle-to-move-diagonally-across-my-page/306359/3
+		if (dirX != 0 && dirY != 0) {
+			const initDirX = dirX;
+			const initDirY = dirY;
+			dirX /= Math.sqrt(Math.pow(initDirX, 2) + Math.pow(initDirY, 2));
+			dirY /= Math.sqrt(Math.pow(initDirX, 2) + Math.pow(initDirY, 2));
+		}
 
 		const x = this.x + dirX * this.dashSpeed;
 		const y = this.y + dirY * this.dashSpeed;
