@@ -4,9 +4,11 @@ import Keyboard from "./front/keyboard.js";
 import CustomEvent from "./front/event.js";
 import Player from "./content/entities/player.js";
 import Controls from "./content/controls.js";
+import HurtBox from "./content/entities/hurtbox.js";
 
 window.runner = null;
 window.player = null;
+window.hurtbox = null;
 
 window.onload = () => {
 	Display.linkCanvas(document.querySelector('canvas'));
@@ -32,6 +34,8 @@ window.onload = () => {
 
 	// console.log(player);
 
+	hurtbox = new HurtBox(100, 10, 20, 20);
+
 	runner.run();
 }
 
@@ -52,9 +56,11 @@ window.onkeyup = (event) => {
 // Update/Draw
 function update () {
 	player.update();
+	hurtbox.update();
 }
 
 function draw () {
 	Display.clearScreen();
 	player.draw();
+	hurtbox.draw();
 }
