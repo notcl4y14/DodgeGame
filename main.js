@@ -35,6 +35,7 @@ window.onload = () => {
 	// console.log(player);
 
 	hurtbox = new HurtBox(100, 10, 20, 20);
+	hurtbox.setVelocity(1, 1);
 
 	runner.run();
 }
