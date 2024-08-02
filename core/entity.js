@@ -4,6 +4,7 @@ export default class Entity {
 
 	position;
 	size;
+	overlaps = [];
 
 	// Setters
 	setPosition (x, y) {
@@ -26,6 +27,15 @@ export default class Entity {
 	}
 	get height () {
 		return this.size[1];
+	}
+
+	// Collision
+	removeOverlap (object) {
+		this.overlaps.splice( this.overlaps.indexOf(object), 1 );
+	}
+
+	onOverlap (other) {
+		return;
 	}
 
 	// Update/Draw
