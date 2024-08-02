@@ -5,8 +5,10 @@ import CustomEvent from "./front/event.js";
 import Player from "./content/entities/player.js";
 import Controls from "./content/controls.js";
 import HurtBox from "./content/entities/hurtbox.js";
+import World from "./core/world.js";
 
 window.runner = null;
+window.world = null;
 window.player = null;
 window.hurtbox = null;
 
@@ -29,6 +31,8 @@ window.onload = () => {
 
 	// console.log(runner);
 
+	world = new World();
+
 	player = new Player(10, 10, 20, 20, 4);
 	player.color = "#0000ff";
 
@@ -36,6 +40,8 @@ window.onload = () => {
 
 	hurtbox = new HurtBox(100, 10, 20, 20);
 	hurtbox.setVelocity(1, 1);
+
+	world.add(hurtbox);
 
 	runner.run();
 }
@@ -56,6 +62,7 @@ window.onkeyup = (event) => {
 
 // Update/Draw
 function update () {
+	world.checkColFor(player);
 	player.update();
 	hurtbox.update();
 }

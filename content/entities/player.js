@@ -32,6 +32,11 @@ export default class Player extends Box {
 		}
 	}
 
+	// Collision
+	onOverlap (other) {
+		console.log("Overlaps!");
+	}
+
 	// Update/Draw
 	update () {
 		const left = Controls.isDown("MoveLeft");
