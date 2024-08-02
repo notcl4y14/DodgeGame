@@ -119,9 +119,16 @@ export default class Player extends Box {
 		const up = Controls.isDown("MoveUp");
 		const down = Controls.isDown("MoveDown");
 
-		const dirX = right - left;
-		const dirY = down - up;
+		let dirX = right - left;
+		let dirY = down - up;
 
+		if (dirX != 0 && dirY != 0) {
+			const initDirX = dirX;
+			const initDirY = dirY;
+			dirX /= Math.sqrt(Math.pow(initDirX, 2) + Math.pow(initDirY, 2));
+			dirY /= Math.sqrt(Math.pow(initDirX, 2) + Math.pow(initDirY, 2));
+		}
+		
 		this.position[0] += dirX * this.dashSpeed;
 		this.position[1] += dirY * this.dashSpeed;
 
