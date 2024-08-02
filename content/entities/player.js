@@ -34,7 +34,8 @@ export default class Player extends Box {
 
 	// Collision
 	onOverlap (other) {
-		console.log("Overlaps!");
+		// console.log("Overlaps!");
+		this.setPosition(10, 10);
 	}
 
 	// Update/Draw
