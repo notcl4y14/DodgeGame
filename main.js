@@ -21,6 +21,7 @@ window.onload = () => {
 	Controls.bindControl("MoveUp", "ArrowUp");
 	Controls.bindControl("MoveDown", "ArrowDown");
 	Controls.bindControl("Dash", "ShiftLeft");
+	Controls.bindControl("Walk", "ControlLeft");
 
 	CustomEvent.addEvent("keydown");
 	CustomEvent.addEvent("keyup");

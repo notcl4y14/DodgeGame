@@ -45,6 +45,7 @@ export default class Player extends Box {
 		const up = Controls.isDown("MoveUp");
 		const down = Controls.isDown("MoveDown");
 		const dash = Controls.isDown("Dash");
+		const walk = Controls.isDown("Walk");
 
 		let dirX = right - left;
 		let dirY = down - up;
@@ -56,6 +57,9 @@ export default class Player extends Box {
 			this.dashSpeed += this.dashSpeed < this.dashSpeedMax
 				? 10
 				: this.dashSpeedMax - this.dashSpeed;
+		} else if (walk) {
+			dirX /= 2;
+			dirY /= 2;
 		}
 
 		this.position[0] += dirX * this.speed;
