@@ -32,7 +32,7 @@ window.onload = () => {
 
 	// console.log(runner);
 
-	world = new World();
+	world = new World(512, 512);
 
 	player = new Player(10, 10, 20, 20, 4);
 	player.color = "#0000ff";
@@ -71,5 +71,6 @@ function update () {
 function draw () {
 	Display.clearScreen();
 	player.draw();
-	hurtbox.draw();
+	// hurtbox.draw();
+	world.draw();
 }

@@ -1,11 +1,19 @@
+import Display from "../front/display.js";
+
 export default class World {
 
 	#objects;
 	max;
 
-	constructor (max = 128) {
+	width;
+	height;
+
+	constructor (width, height, max = 128) {
 		this.#objects = [];
 		this.max = max;
+
+		this.width = width;
+		this.height = height;
 	}
 
 	// Object Functions
@@ -50,6 +58,14 @@ export default class World {
 		for (const object of this.#objects) {
 			object.draw();
 		}
+
+		this.drawBorder();
+	}
+
+	// Draw Functions
+	drawBorder () {
+		Display.context.strokeStyle = "#000000";
+		Display.context.strokeRect(0, 0, this.width, this.height);
 	}
 
 }

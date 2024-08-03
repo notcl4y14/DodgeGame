@@ -28,16 +28,16 @@ export default class HurtBox extends Box {
 		if (this.x < 0) {
 			this.position[0] = 0;
 			this.velocity[0] *= -1;
-		} else if (this.x > Display.canvas.width - this.width) {
-			this.position[0] = Display.canvas.width - this.width;
+		} else if (this.x > world.width - this.width) {
+			this.position[0] = world.width - this.width;
 			this.velocity[0] *= -1;
 		}
 
 		if (this.y < 0) {
 			this.position[1] = 0;
 			this.velocity[1] *= -1;
-		} else if (this.y > Display.canvas.height - this.height) {
-			this.position[1] = Display.canvas.height - this.height;
+		} else if (this.y > world.height - this.height) {
+			this.position[1] = world.height - this.height;
 			this.velocity[1] *= -1;
 		}
 	}
