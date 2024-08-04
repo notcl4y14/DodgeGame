@@ -51,6 +51,16 @@ export default class World {
 	update () {
 		for (const object of this.#objects) {
 			object.update();
+			if (object.x < 0) {
+				object.position[0] = 0;
+			} else if (object.x > this.width - object.width) {
+				object.position[0] = this.width - object.width;
+			}
+			if (object.y < 0) {
+				object.position[1] = 0;
+			} else if (object.y > this.height - object.height) {
+				object.position[1] = this.height - object.height;
+			}
 		}
 	}
 	
