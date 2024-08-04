@@ -29,6 +29,19 @@ export default class Entity {
 		return this.size[1];
 	}
 
+	set x(v) {
+		this.position[0] = v;
+	}
+	set y(v) {
+		this.position[1] = v;
+	}
+	set width(v) {
+		this.size[0] = v;
+	}
+	set height(v) {
+		this.size[1] = v;
+	}
+
 	// Collision
 	removeOverlap (object) {
 		this.overlaps.splice( this.overlaps.indexOf(object), 1 );
