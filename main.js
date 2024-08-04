@@ -73,14 +73,17 @@ function draw () {
 
 // Misc. Functions
 function checkPlayer () {
+	const borderX = world.width - player.width;
 	if (player.x < 0) {
 		player.x = 0;
-	} else if (player.x > world.width - player.width) {
-		player.x = world.width - player.width;
+	} else if (player.x > borderX) {
+		player.x = borderX;
 	}
+
+	const borderY = world.height - player.height;
 	if (player.y < 0) {
 		player.y = 0;
-	} else if (player.y > world.height - player.height) {
-		player.y = world.height - player.height;
+	} else if (player.y > borderY) {
+		player.y = borderY;
 	}
 }
