@@ -60,6 +60,7 @@ window.onkeyup = (event) => {
 // Update/Draw
 function update () {
 	world.checkColFor(player);
+	// world.checkCollision();
 	player.update();
 	checkPlayer();
 	world.update();

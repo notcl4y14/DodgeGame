@@ -35,6 +35,10 @@ export default class World {
 	// Collision Functions
 	checkColFor (object1) {
 		for (const object2 of this.#objects) {
+			// if (object1 === object2) {
+			// 	continue;
+			// }
+
 			const overlaps = this.overlap(object1, object2);
 			const hasOverlap = object1.overlaps.includes(object2);
 
@@ -44,6 +48,12 @@ export default class World {
 			} else if (!overlaps && hasOverlap) {
 				object1.removeOverlap(object2);
 			}
+		}
+	}
+
+	checkCollision () {
+		for (const object of this.#objects) {
+			this.checkColFor(object);
 		}
 	}
 

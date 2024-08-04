@@ -74,6 +74,34 @@ export default class Entity {
 		return;
 	}
 
+	separateFrom (other) {
+		const centerX = other.x + other.width / 2;
+		const centerY = other.y + other.height / 2;
+
+		const dx = this.x - centerX;
+		const dy = this.y - centerY;
+
+		// https://stackoverflow.com/a/22440044/22146374
+		const x1 = Math.max(this.x, other.x);
+		const y1 = Math.max(this.y, other.y);
+		const x2 = Math.min(this.x + this.width, other.x + other.width);
+		const y2 = Math.min(this.y + this.height, other.y + other.height);
+
+		const width = x2 - x1;
+		const height = y2 - y1;
+
+		const vx = width * Math.sign(dx);
+		const vy = height * Math.sign(dy);
+
+		if (width < height) {
+			this.x += vx;
+			return 0;
+		} else {
+			this.y += vy;
+			return 1;
+		}
+	}
+
 	// Misc. Functions
 	destroy () {
 		world.remove(this);
