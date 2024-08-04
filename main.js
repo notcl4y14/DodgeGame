@@ -66,6 +66,17 @@ function update () {
 	world.checkColFor(player);
 	player.update();
 	hurtbox.update();
+
+	if (player.x < 0) {
+		player.position[0] = 0;
+	} else if (player.x > world.width - player.width) {
+		player.position[0] = world.width - player.width;
+	}
+	if (player.y < 0) {
+		player.position[1] = 0;
+	} else if (player.y > world.height - player.height) {
+		player.position[1] = world.height - player.height;
+	}
 }
 
 function draw () {
