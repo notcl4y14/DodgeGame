@@ -4,7 +4,14 @@ export default class Entity {
 
 	position;
 	size;
+	velocity;
 	overlaps = [];
+
+	constructor () {
+		this.position = [0, 0];
+		this.size = [0, 0];
+		this.velocity = [0, 0];
+	}
 
 	// Setters
 	setPosition (x, y) {
@@ -13,6 +20,16 @@ export default class Entity {
 
 	setSize (width, height) {
 		this.size = [width, height];
+	}
+
+	setVelocity(x, y) {
+		this.velocity = [x, y];
+	}
+
+	// Velocity
+	applyVelocity() {
+		this.position[0] += this.velocity[0];
+		this.position[1] += this.velocity[1];
 	}
 
 	// Position Functions
@@ -58,6 +75,36 @@ export default class Entity {
 	}
 
 	// Misc. Functions
+	destroy () {
+		world.remove(this);
+	}
+
+	bounceOffX () {
+		this.velocity[0] *= -1;
+	}
+
+	bounceOffY () {
+		this.velocity[1] *= -1;
+	}
+
+	bounceOffWorld () {
+		if (this.x < 0) {
+			this.x = 0;
+			this.bounceOffX();
+		} else if (this.x > world.width - this.width) {
+			this.x = world.width - this.width;
+			this.bounceOffX();
+		}
+
+		if (this.y < 0) {
+			this.y = 0;
+			this.bounceOffY();
+		} else if (this.y > world.height - this.height) {
+			this.y = world.height - this.height;
+			this.bounceOffY();
+		}
+	}
+
 	isOutOfBounds (world) {
 		return this.x < 0 || this.x > world.width - this.width ||
 		       this.y < 0 || this.y > world.height - this.height;
