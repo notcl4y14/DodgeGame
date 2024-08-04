@@ -15,6 +15,12 @@ export default class Entity {
 		this.size = [width, height];
 	}
 
+	// Position Functions
+	move (x, y) {
+		this.position[0] += x;
+		this.position[1] += y;
+	}
+
 	// Getters/Setters
 	get x () {
 		return this.position[0];
@@ -49,6 +55,12 @@ export default class Entity {
 
 	onOverlap (other) {
 		return;
+	}
+
+	// Misc. Functions
+	isOutOfBounds (world) {
+		return this.x < 0 || this.x > world.width - this.width ||
+		       this.y < 0 || this.y > world.height - this.height;
 	}
 
 	// Update/Draw
