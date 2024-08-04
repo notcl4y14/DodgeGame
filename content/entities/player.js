@@ -103,8 +103,20 @@ export default class Player extends Box {
 			dirY /= Math.sqrt(Math.pow(initDirX, 2) + Math.pow(initDirY, 2));
 		}
 
-		const x = this.x + dirX * this.dashSpeed;
-		const y = this.y + dirY * this.dashSpeed;
+		let x = this.x + dirX * this.dashSpeed;
+		let y = this.y + dirY * this.dashSpeed;
+
+		if (x < 0) {
+			x = 0;
+		} else if (x > world.width - this.width) {
+			x = world.width - this.width;
+		}
+
+		if (y < 0) {
+			y = 0;
+		} else if (y > world.height - this.height) {
+			y = world.height - this.height;
+		}
 
 		Display.context.fillStyle = this.color;
 		Display.context.fillRect(x, y, this.width, this.height);
@@ -117,7 +129,7 @@ export default class Player extends Box {
 
 		Display.context.beginPath();
 		Display.context.moveTo(this.x + this.width / 2, this.y + this.height / 2);
-		Display.context.lineTo((this.x + this.width / 2) + dirX * this.dashSpeed, (this.y + this.height / 2) + dirY * this.dashSpeed);
+		Display.context.lineTo(x + this.width / 2, y + this.height / 2);
 		Display.context.closePath();
 		Display.context.stroke();
 	}
