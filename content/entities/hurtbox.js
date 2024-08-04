@@ -1,5 +1,4 @@
 import Box from "../../core/box.js";
-import Display from "../../front/display.js";
 
 export default class HurtBox extends Box {
 
