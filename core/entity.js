@@ -63,6 +63,21 @@ export default class Entity {
 		       this.y < 0 || this.y > world.height - this.height;
 	}
 
+	getSidePos (side) {
+		switch (side) {
+			case "left":
+				return this.x;
+			case "right":
+				return this.x + this.width;
+			case "top":
+				return this.y;
+			case "bottom":
+				return this.y + this.height;
+			default:
+				return null;
+		}
+	}
+
 	// Update/Draw
 	update () {
 		return;
