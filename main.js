@@ -30,14 +30,10 @@ window.onload = () => {
 	runner.update = update;
 	runner.draw = draw;
 
-	// console.log(runner);
-
 	world = new World(512, 512);
 
 	player = new Player(10, 10, 20, 20, 4);
 	player.color = "#0000ff";
-
-	// console.log(player);
 
 	hurtbox = new HurtBox(100, 10, 20, 20);
 	hurtbox.setVelocity(1, 1);
@@ -65,22 +61,26 @@ window.onkeyup = (event) => {
 function update () {
 	world.checkColFor(player);
 	player.update();
+	checkPlayer();
 	world.update();
-
-	if (player.x < 0) {
-		player.position[0] = 0;
-	} else if (player.x > world.width - player.width) {
-		player.position[0] = world.width - player.width;
-	}
-	if (player.y < 0) {
-		player.position[1] = 0;
-	} else if (player.y > world.height - player.height) {
-		player.position[1] = world.height - player.height;
-	}
 }
 
 function draw () {
 	Display.clearScreen();
 	player.draw();
 	world.draw();
+}
+
+// Misc. Functions
+function checkPlayer () {
+	if (player.x < 0) {
+		player.x = 0;
+	} else if (player.x > world.width - player.width) {
+		player.x = world.width - player.width;
+	}
+	if (player.y < 0) {
+		player.y = 0;
+	} else if (player.y > world.height - player.height) {
+		player.y = world.height - player.height;
+	}
 }
