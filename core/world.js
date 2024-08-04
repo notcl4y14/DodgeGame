@@ -3,6 +3,7 @@ import Display from "../front/display.js";
 export default class World {
 
 	#objects;
+	#removeList;
 	max;
 
 	width;
@@ -10,6 +11,7 @@ export default class World {
 
 	constructor (width, height, max = 128) {
 		this.#objects = [];
+		this.#removeList = [];
 		this.max = max;
 
 		this.width = width;
@@ -22,7 +24,12 @@ export default class World {
 	}
 
 	remove (object) {
-		this.#objects.splice( this.#objects.indexOf(object), 1 );
+		this.#removeList.push(object);
+		// this.#objects.splice( this.#objects.indexOf(object), 1 );
+	}
+
+	#clearRemoveList () {
+		this.#removeList = [];
 	}
 
 	// Collision Functions
@@ -51,6 +58,7 @@ export default class World {
 	update () {
 		for (const object of this.#objects) {
 			object.update();
+
 			if (object.x < 0) {
 				object.position[0] = 0;
 			} else if (object.x > this.width - object.width) {
@@ -62,6 +70,12 @@ export default class World {
 				object.position[1] = this.height - object.height;
 			}
 		}
+
+		for (const object of this.#removeList) {
+			this.#objects.splice( this.#objects.indexOf(object), 1 );
+		}
+
+		this.#clearRemoveList();
 	}
 	
 	draw () {
