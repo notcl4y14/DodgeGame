@@ -2,6 +2,8 @@ import Controls from "../controls.js";
 import Box from "../../core/box.js";
 import CustomEvent from "../../front/event.js";
 import Display from "../../front/display.js";
+import Shard from "../particles/shard.js";
+import HurtBox from "./hurtbox.js";
 
 export default class Player extends Box {
 
@@ -35,7 +37,55 @@ export default class Player extends Box {
 	// Collision
 	onOverlap (other) {
 		// console.log("Overlaps!");
+		if (other.constructor !== HurtBox) return;
+		this.explode(4, 4);
 		this.setPosition(10, 10);
+	}
+
+	// Misc. Functions
+	dash () {
+		const left = Controls.isDown("MoveLeft");
+		const right = Controls.isDown("MoveRight");
+		const up = Controls.isDown("MoveUp");
+		const down = Controls.isDown("MoveDown");
+
+		let dirX = right - left;
+		let dirY = down - up;
+
+		if (dirX != 0 && dirY != 0) {
+			const initDirX = dirX;
+			const initDirY = dirY;
+			dirX /= Math.sqrt(Math.pow(initDirX, 2) + Math.pow(initDirY, 2));
+			dirY /= Math.sqrt(Math.pow(initDirX, 2) + Math.pow(initDirY, 2));
+		}
+
+		this.position[0] += dirX * this.dashSpeed;
+		this.position[1] += dirY * this.dashSpeed;
+
+		this.dashSpeed = 0;
+	}
+
+	explode (rows, columns) {
+		const partWidth = this.width / columns;
+		const partHeight = this.height / rows;
+
+		for (let x = 0; x < rows; x++) {
+			for (let y = 0; y < columns; y++) {
+				// alert(x + ";" + y);
+				// const partX = x + this.x;
+				// const partY = y + this.y;
+
+				const shard = new Shard();
+				shard.setPosition(this.x + x * partWidth, this.y + y * partHeight);
+				shard.setSize(partWidth, partHeight);
+				shard.setVelocity(x - columns / 2.5, y - rows / 2.5);
+				shard.setColor(this.color);
+				shard.setAlphaSettings(1, 0.01);
+				world.add(shard);
+			}
+		}
+
+		// alert("done");
 	}
 
 	// Update/Draw
@@ -132,29 +182,6 @@ export default class Player extends Box {
 		Display.context.lineTo(x + this.width / 2, y + this.height / 2);
 		Display.context.closePath();
 		Display.context.stroke();
-	}
-
-	// Misc.
-	dash () {
-		const left = Controls.isDown("MoveLeft");
-		const right = Controls.isDown("MoveRight");
-		const up = Controls.isDown("MoveUp");
-		const down = Controls.isDown("MoveDown");
-
-		let dirX = right - left;
-		let dirY = down - up;
-
-		if (dirX != 0 && dirY != 0) {
-			const initDirX = dirX;
-			const initDirY = dirY;
-			dirX /= Math.sqrt(Math.pow(initDirX, 2) + Math.pow(initDirY, 2));
-			dirY /= Math.sqrt(Math.pow(initDirX, 2) + Math.pow(initDirY, 2));
-		}
-		
-		this.position[0] += dirX * this.dashSpeed;
-		this.position[1] += dirY * this.dashSpeed;
-
-		this.dashSpeed = 0;
 	}
 
 }
