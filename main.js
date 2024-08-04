@@ -65,7 +65,7 @@ window.onkeyup = (event) => {
 function update () {
 	world.checkColFor(player);
 	player.update();
-	hurtbox.update();
+	world.update();
 
 	if (player.x < 0) {
 		player.position[0] = 0;
@@ -82,6 +82,5 @@ function update () {
 function draw () {
 	Display.clearScreen();
 	player.draw();
-	// hurtbox.draw();
 	world.draw();
 }
