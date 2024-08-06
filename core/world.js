@@ -3,7 +3,9 @@ import Display from "../front/display.js";
 export default class World {
 
 	#objects;
-	#removeList;
+	#particles;
+	#objectsRemove;
+	#particlesRemove;
 	max;
 
 	width;
@@ -11,7 +13,9 @@ export default class World {
 
 	constructor (width, height, max = 128) {
 		this.#objects = [];
-		this.#removeList = [];
+		this.#particles = [];
+		this.#objectsRemove = [];
+		this.#particlesRemove = [];
 		this.max = max;
 
 		this.width = width;
@@ -23,13 +27,24 @@ export default class World {
 		this.#objects.push(object);
 	}
 
-	remove (object) {
-		this.#removeList.push(object);
-		// this.#objects.splice( this.#objects.indexOf(object), 1 );
+	addParticle (object) {
+		this.#particles.push(object);
 	}
 
-	#clearRemoveList () {
-		this.#removeList = [];
+	remove (object) {
+		this.#objectsRemove.push(object);
+	}
+
+	removeParticle (object) {
+		this.#particlesRemove.push(object);
+	}
+
+	#clearObjectsRemove () {
+		this.#objectsRemove = [];
+	}
+
+	#clearParticlesRemove() {
+		this.#particlesRemove = [];
 	}
 
 	// Collision Functions
@@ -66,34 +81,58 @@ export default class World {
 
 	// Update/Draw
 	update () {
-		for (const object of this.#objects) {
-			object.update();
+		this.updateObjects();
+		this.updateParticles();
 
-			if (object.x < 0) {
-				object.position[0] = 0;
-			} else if (object.x > this.width - object.width) {
-				object.position[0] = this.width - object.width;
-			}
-			if (object.y < 0) {
-				object.position[1] = 0;
-			} else if (object.y > this.height - object.height) {
-				object.position[1] = this.height - object.height;
-			}
-		}
-
-		for (const object of this.#removeList) {
+		for (const object of this.#objectsRemove) {
 			this.#objects.splice( this.#objects.indexOf(object), 1 );
 		}
 
-		this.#clearRemoveList();
+		for (const particle of this.#particlesRemove) {
+			this.#particles.splice(this.#particles.indexOf(particle), 1);
+		}
+
+		this.#clearObjectsRemove();
+		this.#clearParticlesRemove();
 	}
 	
 	draw () {
 		for (const object of this.#objects) {
 			object.draw();
 		}
+		for (const particle of this.#particles) {
+			particle.draw();
+		}
 
 		this.drawBorder();
+	}
+
+	// Update Functions
+	updateObjects () {
+		for (const object of this.#objects) {
+			object.update();
+			this.checkObjectBounds(object);
+		}
+	}
+
+	updateParticles () {
+		for (const particle of this.#particles) {
+			particle.update();
+			this.checkObjectBounds(particle);
+		}
+	}
+	
+	checkObjectBounds (object) {
+		if (object.x < 0) {
+			object.position[0] = 0;
+		} else if (object.x > this.width - object.width) {
+			object.position[0] = this.width - object.width;
+		}
+		if (object.y < 0) {
+			object.position[1] = 0;
+		} else if (object.y > this.height - object.height) {
+			object.position[1] = this.height - object.height;
+		}
 	}
 
 	// Draw Functions

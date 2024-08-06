@@ -81,7 +81,7 @@ export default class Player extends Box {
 				shard.setVelocity(x - columns / 2.5, y - rows / 2.5);
 				shard.setColor(this.color);
 				shard.setAlphaSettings(1, 0.01);
-				world.add(shard);
+				world.addParticle(shard);
 			}
 		}
 

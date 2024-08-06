@@ -30,6 +30,10 @@ export default class Particle extends Box {
 		}
 	}
 
+	destroy () {
+		world.removeParticle(this);
+	}
+
 	draw () {
 		const r = this.colorBase[0];
 		const g = this.colorBase[1];
