@@ -68,8 +68,16 @@ function update () {
 
 function draw () {
 	Display.clearScreen();
+
+	Display.context.save();
+	Display.context.translate(
+		Display.canvas.width / 2 - world.width / 2,
+		Display.canvas.height / 2 - world.height / 2
+	);
+	
 	player.draw();
 	world.draw();
+	Display.context.restore();
 }
 
 // Misc. Functions
