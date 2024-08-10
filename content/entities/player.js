@@ -39,7 +39,8 @@ export default class Player extends Box {
 		// console.log("Overlaps!");
 		if (other.constructor !== HurtBox) return;
 		this.explode(4, 4);
-		this.setPosition(10, 10);
+		this.destroy();
+		player = null;
 	}
 
 	// Misc. Functions

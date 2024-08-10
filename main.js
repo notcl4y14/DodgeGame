@@ -27,6 +27,8 @@ window.onload = () => {
 	player = new Player(10, 10, 20, 20, 4);
 	player.color = "#0000ff";
 
+	world.add(player);
+
 	hurtbox = new HurtBox(100, 10, 20, 20);
 	hurtbox.setVelocity(1, 1);
 
@@ -70,11 +72,17 @@ function initEvents() {
 }
 
 // Update/Draw
-function update () {
-	world.checkColFor(player);
-	player.update();
-	checkPlayer();
+function update() {
+	if (player) {
+		world.checkColFor(player);
+	} else {
+		if (Keyboard.isKeyDown("KeyR")) {
+			location.reload();
+		}
+	}
+	// player.update();
 	world.update();
+	checkPlayer();
 }
 
 function draw () {
@@ -87,14 +95,38 @@ function draw () {
 		Display.canvas.height / 2 - world.height / 2
 	);
 	
-	player.draw();
+	// player.draw();
 	world.draw();
 	
 	Display.context.restore();
+
+	if (!player) {
+		Display.context.save();
+		Display.context.translate(
+			Display.canvas.width / 2,
+			Display.canvas.height / 2
+		);
+		
+		Display.context.textBaseline = "middle";
+		Display.context.textAlign = "center";
+		Display.context.fillStyle = "#000000";
+		
+		Display.context.font = "16px sans-serif";
+		Display.context.fillText("Game Over", 0, 0);
+
+		Display.context.font = "10px sans-serif";
+		Display.context.fillText("Press R to restart", 0, 10);
+
+		Display.context.restore();
+	}
 }
 
 // Misc. Functions
 function checkPlayer () {
+	if (!player) {
+		return;
+	}
+
 	const borderX = world.width - player.width;
 	player.x = MathUtil.clamp(player.x, 0, borderX);
 
