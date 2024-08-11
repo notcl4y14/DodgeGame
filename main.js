@@ -11,7 +11,9 @@ import MathUtil from "./util/math.js";
 window.runner = null;
 window.world = null;
 window.player = null;
-window.hurtbox = null;
+// window.hurtbox = null;
+
+// window.Display = null;
 
 window.onload = () => {
 	initCanvas();
@@ -64,6 +66,7 @@ function initEvents() {
 }
 
 function initLevel() {
+	// world = new World(512, 512);
 	world.clearObjects();
 	world.clearParticles();
 	
@@ -72,10 +75,33 @@ function initLevel() {
 
 	world.add(player);
 
-	hurtbox = new HurtBox(0, 0, 20, 20);
-	hurtbox.setVelocity(1, 1);
+	const hurtbox1 = new HurtBox(0, 0, 20, 20);
+	hurtbox1.setVelocity(2, 2);
+	const hurtbox2 = new HurtBox(world.width - 20, 0, 20, 20);
+	hurtbox2.setVelocity(-2, 2);
+	const hurtbox3 = new HurtBox(0, world.height - 20, 20, 20);
+	hurtbox3.setVelocity(2, 2);
+	const hurtbox4 = new HurtBox(world.width - 20, world.height - 20, 20, 20);
+	hurtbox4.setVelocity(-2, 2);
 
-	world.add(hurtbox);
+	world.add(hurtbox1);
+	world.add(hurtbox2);
+	world.add(hurtbox3);
+	world.add(hurtbox4);
+
+	// async function advance() {
+	// 	if (world.width < 1024) {
+	// 		world.width += (1024 / world.width) * 5;
+	// 		if (world.width > 1020) {
+	// 			world.width = 1024;
+	// 		}
+	// 		requestAnimationFrame( advance );
+	// 	}
+	// }
+
+	// setTimeout(() => {
+	// 	advance();
+	// }, 4000);
 }
 
 // Update/Draw
