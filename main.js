@@ -24,15 +24,7 @@ window.onload = () => {
 
 	world = new World(512, 512);
 
-	player = new Player(10, 10, 20, 20, 4);
-	player.color = "#0000ff";
-
-	world.add(player);
-
-	hurtbox = new HurtBox(100, 10, 20, 20);
-	hurtbox.setVelocity(1, 1);
-
-	world.add(hurtbox);
+	initLevel();
 
 	runner.run();
 }
@@ -71,13 +63,28 @@ function initEvents() {
 	CustomEvent.addEvent("keyup");
 }
 
+function initLevel() {
+	world.clearObjects();
+	world.clearParticles();
+	
+	player = new Player(10, 10, 20, 20, 4);
+	player.color = "#0000ff";
+
+	world.add(player);
+
+	hurtbox = new HurtBox(100, 10, 20, 20);
+	hurtbox.setVelocity(1, 1);
+
+	world.add(hurtbox);
+}
+
 // Update/Draw
 function update() {
 	if (player) {
 		world.checkColFor(player);
 	} else {
 		if (Keyboard.isKeyDown("KeyR")) {
-			location.reload();
+			initLevel();
 		}
 	}
 	// player.update();
