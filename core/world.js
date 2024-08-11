@@ -93,7 +93,8 @@ export default class World {
 		this.updateParticles();
 
 		for (const object of this.#objectsRemove) {
-			this.#objects.splice( this.#objects.indexOf(object), 1 );
+			const index = this.#objects.indexOf(object);
+			index != -1 ? this.#objects.splice( index, 1 ) : null;
 		}
 
 		for (const particle of this.#particlesRemove) {
