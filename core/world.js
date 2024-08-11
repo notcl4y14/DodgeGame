@@ -31,6 +31,14 @@ export default class World {
 		this.#particles.push(object);
 	}
 
+	clearObjects() {
+		this.#objects = [];
+	}
+
+	clearParticles() {
+		this.#particles = [];
+	}
+
 	remove (object) {
 		this.#objectsRemove.push(object);
 	}
