@@ -67,12 +67,12 @@ function initLevel() {
 	world.clearObjects();
 	world.clearParticles();
 	
-	player = new Player(10, 10, 20, 20, 4);
+	player = new Player(world.width / 2 - 10, world.height / 2 - 10, 20, 20, 4);
 	player.color = "#0000ff";
 
 	world.add(player);
 
-	hurtbox = new HurtBox(100, 10, 20, 20);
+	hurtbox = new HurtBox(0, 0, 20, 20);
 	hurtbox.setVelocity(1, 1);
 
 	world.add(hurtbox);
