@@ -88,20 +88,6 @@ function initLevel() {
 	world.add(hurtbox2);
 	world.add(hurtbox3);
 	world.add(hurtbox4);
-
-	// async function advance() {
-	// 	if (world.width < 1024) {
-	// 		world.width += (1024 / world.width) * 5;
-	// 		if (world.width > 1020) {
-	// 			world.width = 1024;
-	// 		}
-	// 		requestAnimationFrame( advance );
-	// 	}
-	// }
-
-	// setTimeout(() => {
-	// 	advance();
-	// }, 4000);
 }
 
 // Update/Draw
