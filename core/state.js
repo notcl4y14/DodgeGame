@@ -1,6 +1,6 @@
 export default class State {
 
-	name;
+	static name;
 	
 	static update () {}
 	static draw () {}
