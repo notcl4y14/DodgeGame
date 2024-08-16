@@ -4,6 +4,7 @@ import CustomEvent from "../../front/event.js";
 import Display from "../../front/display.js";
 import Shard from "../particles/shard.js";
 import HurtBox from "./hurtbox.js";
+import GameOver from "../states/gameover.js";
 
 export default class Player extends Box {
 
@@ -41,6 +42,7 @@ export default class Player extends Box {
 		this.explode(4, 4);
 		this.destroy();
 		player = null;
+		state = GameOver;
 	}
 
 	// Misc. Functions

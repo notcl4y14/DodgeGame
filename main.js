@@ -7,13 +7,12 @@ import Display from "./front/display.js";
 import Keyboard from "./front/keyboard.js";
 import CustomEvent from "./front/event.js";
 import MathUtil from "./util/math.js";
+import Level from "./content/states/level.js";
 
 window.runner = null;
 window.world = null;
 window.player = null;
-// window.hurtbox = null;
-
-// window.Display = null;
+window.state = null;
 
 window.onload = () => {
 	initCanvas();
@@ -27,6 +26,8 @@ window.onload = () => {
 	world = new World(512, 512);
 
 	initLevel();
+
+	state = Level;
 
 	runner.run();
 }
@@ -65,10 +66,12 @@ function initEvents() {
 	CustomEvent.addEvent("keyup");
 }
 
-function initLevel() {
+window.initLevel = function() {
 	// world = new World(512, 512);
 	world.clearObjects();
 	world.clearParticles();
+
+	state = Level;
 	
 	player = new Player(world.width / 2 - 10, world.height / 2 - 10, 20, 20, 4);
 	player.color = "#0000ff";
@@ -92,52 +95,26 @@ function initLevel() {
 
 // Update/Draw
 function update() {
-	if (player) {
-		world.checkColFor(player);
-	} else {
-		if (Keyboard.isKeyDown("KeyR")) {
-			initLevel();
-		}
-	}
-	// player.update();
-	world.update();
+	// world.checkColFor(player);
+	// world.update();
+	state.update();
 	checkPlayer();
 }
 
 function draw () {
 	Display.clearScreen();
+	state.draw();
 
 	// Center the World box
-	Display.context.save();
-	Display.context.translate(
-		Display.canvas.width / 2 - world.width / 2,
-		Display.canvas.height / 2 - world.height / 2
-	);
+	// Display.context.save();
+	// Display.context.translate(
+	// 	Display.canvas.width / 2 - world.width / 2,
+	// 	Display.canvas.height / 2 - world.height / 2
+	// );
 	
-	// player.draw();
-	world.draw();
+	// world.draw();
 	
-	Display.context.restore();
-
-	if (!player) {
-		Display.context.save();
-		Display.context.translate(
-			Display.canvas.width / 2,
-			Display.canvas.height / 2
-		);
-		
-		Display.context.textBaseline = "middle";
-		Display.context.textAlign = "center";
-		Display.context.fillStyle = "#000000";
-		
-		Display.context.font = "16px sans-serif";
-		Display.context.fillText("Game Over", 0, 0);
-
-		Display.context.font = "10px sans-serif";
-		Display.context.fillText("Press R to restart", 0, 10);
-
-		Display.context.restore();
-	}
+	// Display.context.restore();
 }
 
 // Misc. Functions
