@@ -8,6 +8,7 @@ import Keyboard from "./front/keyboard.js";
 import CustomEvent from "./front/event.js";
 import MathUtil from "./util/math.js";
 import Level from "./content/states/level.js";
+import MainMenu from "./content/states/mainmenu.js";
 
 window.runner = null;
 window.world = null;
@@ -25,9 +26,10 @@ window.onload = () => {
 
 	world = new World(512, 512);
 
-	initLevel();
+	// initLevel();
 
-	state = Level;
+	state = MainMenu;
+	state.init();
 
 	runner.run();
 }
@@ -67,7 +69,7 @@ function initEvents() {
 }
 
 window.initLevel = function() {
-	// world = new World(512, 512);
+	world = new World(512, 512);
 	world.clearObjects();
 	world.clearParticles();
 
