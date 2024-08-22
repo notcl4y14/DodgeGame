@@ -53,9 +53,12 @@ export default class MainMenu extends State {
 			Display.canvas.height / 2
 		);
 
+		Display.context.fillStyle = "#000000";
+		Display.context.fillRect(-100, -20, 100 * 2, 20 * 2);
+
 		Display.context.textBaseline = "middle";
 		Display.context.textAlign = "center";
-		Display.context.fillStyle = "#000000";
+		Display.context.fillStyle = "#ffffff";
 
 		Display.context.font = "16px sans-serif";
 		Display.context.fillText("Press Spacebar to Start", 0, 0);

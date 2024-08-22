@@ -32,9 +32,12 @@ export default class GameOver extends State {
 			Display.canvas.height / 2
 		);
 
+		Display.context.fillStyle = "#000000";
+		Display.context.fillRect(-100, -20, 100 * 2, 20 * 2);
+
 		Display.context.textBaseline = "middle";
 		Display.context.textAlign = "center";
-		Display.context.fillStyle = "#000000";
+		Display.context.fillStyle = "#ffffff";
 
 		Display.context.font = "16px sans-serif";
 		Display.context.fillText("Game Over", 0, 0);
