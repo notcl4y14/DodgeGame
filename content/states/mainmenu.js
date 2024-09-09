@@ -4,10 +4,13 @@ import World from "../../core/world.js";
 import Display from "../../front/display.js";
 import Keyboard from "../../front/keyboard.js";
 import drawPrompt from "../../util/graphics.js";
+import SelectBox from "../../common/selectbox.js";
 
 export default class MainMenu extends State {
 
 	static name = "MainMenu";
+
+	static selectBox = new SelectBox([ "Play", "Settings" ]);
 
 	static init() {
 		world = new World(1024, 512);
@@ -28,9 +31,19 @@ export default class MainMenu extends State {
 	}
 
 	static update() {
-		if (Keyboard.isKeyDown("Space"))
-		{
-			initLevel();
+		// if (Keyboard.isKeyDown("Space"))
+		// {
+		// 	initLevel();
+		// }
+
+		if (Keyboard.isKeyPressed("ArrowUp")) {
+			this.selectBox.move(-1);
+		} else if (Keyboard.isKeyPressed("ArrowDown")) {
+			this.selectBox.move(1);
+		} else if (Keyboard.isKeyPressed("Space")) {
+			if (this.selectBox.index == 0) {
+				initLevel();
+			}
 		}
 
 		world.update();
@@ -48,7 +61,9 @@ export default class MainMenu extends State {
 
 		Display.context.restore();
 
-		drawPrompt("Press Spacebar to Start");
+		this.selectBox.draw(10, 10, 200, 50);
+
+		// drawPrompt("Press Spacebar to Start");
 	}
 
 }
