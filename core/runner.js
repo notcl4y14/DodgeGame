@@ -39,7 +39,7 @@ export default class Runner {
 	// Draw Functions
 	drawFPS () {
 		const fps = Math.floor(1000 / this.delta);
-		Display.context.fillStyle = "#000000";
+		Display.context.fillStyle = "#ffffff";
 		Display.context.fillText(`FPS: ${fps}`, 0, 10);
 	}
 
