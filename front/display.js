@@ -3,7 +3,7 @@ export default class Display {
 	static canvas;
 	static context;
 
-	static clearColor = "#efefef";
+	static clearColor = "rgb(10,10,10)";
 
 	static linkCanvas (canvas) {
 		this.canvas = canvas;

@@ -97,8 +97,6 @@ window.initLevel = function() {
 
 // Update/Draw
 function update() {
-	// world.checkColFor(player);
-	// world.update();
 	state.update();
 	checkPlayer();
 }
@@ -106,17 +104,6 @@ function update() {
 function draw () {
 	Display.clearScreen();
 	state.draw();
-
-	// Center the World box
-	// Display.context.save();
-	// Display.context.translate(
-	// 	Display.canvas.width / 2 - world.width / 2,
-	// 	Display.canvas.height / 2 - world.height / 2
-	// );
-	
-	// world.draw();
-	
-	// Display.context.restore();
 }
 
 // Misc. Functions

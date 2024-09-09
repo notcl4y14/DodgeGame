@@ -149,7 +149,7 @@ export default class World {
 
 	// Draw Functions
 	drawBorder () {
-		Display.context.strokeStyle = "#000000";
+		Display.context.strokeStyle = "rgb(50,50,50)";
 		Display.context.strokeRect(0, 0, this.width, this.height);
 	}
 
