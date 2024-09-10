@@ -10,7 +10,7 @@ export default class MainMenu extends State {
 
 	static name = "MainMenu";
 
-	static selectBox = new SelectBox([ "Play", "Settings" ]);
+	static selectBox = new SelectBox(10, 10, 200, 50, [ "Play", "Settings" ]);
 
 	static init() {
 		world = new World(1024, 512);
@@ -61,7 +61,7 @@ export default class MainMenu extends State {
 
 		Display.context.restore();
 
-		this.selectBox.draw(10, 10, 200, 50);
+		this.selectBox.draw();
 
 		// drawPrompt("Press Spacebar to Start");
 	}

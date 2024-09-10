@@ -1,16 +1,22 @@
 import Display from "../front/display.js";
+import Panel from "./panel.js";
 
-export default class SelectBox {
+export default class SelectBox extends Panel {
 
 	static prefix = "> ";
-	static optionsPadding = 10;
-	static textInterval = 14;
-	static font = "15px monospace";
+	static unprefix = "  ";
 
 	options = [];
 	index = 0;
 
-	constructor (options) {
+	constructor (x, y, width, height, options) {
+		super();
+
+		this.x = x;
+		this.y = y;
+		this.width = width;
+		this.height = height;
+
 		this.options = options;
 		this.index = 0;
 	}
@@ -25,34 +31,33 @@ export default class SelectBox {
 		}
 	}
 
-	draw (x, y, width, height) {
-		Display.context.fillStyle = "#000000";
-		Display.context.fillRect(x, y, width, height);
+	draw () {
+		Display.context.fillStyle = Panel.bgColor;
+		Display.context.fillRect(this.x, this.y, this.width, this.height);
 
-		this.drawOptions(x, y);
+		this.drawOptions();
 	}
 
-	drawOptions (x, y) {
-		x = SelectBox.optionsPadding + x;
-		y = SelectBox.optionsPadding + y;
-
-		// console.log(y);
-		// debugger;
+	drawOptions () {
+		const x = Panel.innerPadding + this.x;
+		const y = Panel.innerPadding + this.y;
 
 		Display.context.save();
 		Display.context.textBaseline = "top";
-		Display.context.font = SelectBox.font;
+		Display.context.font = Panel.font;
 
-		Display.context.fillStyle = "#ffffff";
+		Display.context.fillStyle = Panel.textColor;
 
 		for (let i = 0; i < this.options.length; i++) {
 			let option = this.options[i];
 
 			if (i == this.index) {
 				option = SelectBox.prefix + option;
+			} else {
+				option = SelectBox.unprefix + option;
 			}
 
-			Display.context.fillText(option, x, y + i * SelectBox.textInterval);
+			Display.context.fillText(option, x, y + i * Panel.textInterval);
 		}
 
 		Display.context.restore();
