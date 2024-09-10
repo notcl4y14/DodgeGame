@@ -5,6 +5,7 @@ import Display from "../../front/display.js";
 import Keyboard from "../../front/keyboard.js";
 import drawPrompt from "../../util/graphics.js";
 import SelectBox from "../../common/selectbox.js";
+import Settings from "./settings.js";
 
 export default class MainMenu extends State {
 
@@ -43,6 +44,9 @@ export default class MainMenu extends State {
 		} else if (Keyboard.isKeyPressed("Space")) {
 			if (this.selectBox.index == 0) {
 				initLevel();
+			} else if (this.selectBox.index == 1) {
+				state = Settings;
+				state.init();
 			}
 		}
 
