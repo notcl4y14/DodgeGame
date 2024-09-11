@@ -9,6 +9,7 @@ import CustomEvent from "./front/event.js";
 import MathUtil from "./util/math.js";
 import Level from "./content/states/level.js";
 import MainMenu from "./content/states/mainmenu.js";
+import Options from "./common/options.js";
 
 window.runner = null;
 window.world = null;
@@ -76,7 +77,7 @@ window.initLevel = function() {
 	state = Level;
 	
 	player = new Player(world.width / 2 - 10, world.height / 2 - 10, 20, 20, 4);
-	player.color = "#0000ff";
+	player.color = Options.playerColor;
 
 	world.add(player);
 

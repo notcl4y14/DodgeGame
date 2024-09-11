@@ -6,6 +6,7 @@ import Keyboard from "../../front/keyboard.js";
 import drawPrompt from "../../util/graphics.js";
 import OptionsBox from "../../common/optionsbox.js";
 import MainMenu from "./mainmenu.js";
+import Options from "../../common/options.js";
 
 export default class Settings extends State {
 
@@ -14,7 +15,7 @@ export default class Settings extends State {
 	static optionsBox = new OptionsBox(10, 10, 400, 500, [ "Back", "Player Color" ]);
 
 	static init() {
-		this.optionsBox.values[1] = "#0000ff";
+		this.optionsBox.values[1] = Options.playerColor;
 	}
 
 	static update() {
@@ -33,6 +34,7 @@ export default class Settings extends State {
 				const newColor = prompt("New Color");
 				Keyboard.setKey("Space", false);
 				this.optionsBox.values[1] = newColor;
+				Options.playerColor = newColor;
 			}
 		}
 
